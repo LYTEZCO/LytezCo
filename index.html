@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LYTEZCO · modern malaysia</title>
+  <!-- refined fonts: elegant, premium sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- font awesome 6 (minimal icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fafafc;
+      font-family: 'Inter', 'Manrope', sans-serif;
+      color: #1e262b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* clean, minimal container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* very subtle malaysia texture – faint petronas lines, no neon glow */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.03"><path fill="none" stroke="%23224567" stroke-width="0.6" d="M40 140 L40 50 L55 50 L55 140 M80 140 L80 30 L95 30 L95 140 M120 140 L120 70 L135 70 L135 140 M160 140 L160 20 L175 20 L175 140"/><polygon points="30,150 180,150 175,160 25,160" fill="%23334466" opacity="0.2"/></svg>');
+      background-repeat: repeat;
+      background-size: 300px auto;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* all content above subtle bg */
+    header, main, section, footer {
+      position: relative;
+      z-index: 5;
+    }
+
+    /* premium, clean header — no glowing, just refined border */
+    header {
+      padding: 24px 0 16px;
+      border-bottom: 1px solid rgba(0, 80, 100, 0.15);
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 2.2rem;
+      letter-spacing: -0.02em;
+      color: #0a3847;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #1e3d4a;
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 4px;
+      transition: border-color 0.2s;
+    }
+
+    .nav-links a:hover {
+      border-bottom-color: #006b8f;
+      color: #0a2e3a;
+    }
+
+    .cart-icon {
+      font-size: 1.4rem;
+      color: #0a3847;
+    }
+
+    /* HERO — modern, editorial, less game */
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      padding: 80px 0 100px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 4.2rem;
+      line-height: 1.1;
+      color: #0b2d39;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span {
+      color: #3f6b7e;
+      font-weight: 500;
+      display: inline-block;
+      border-bottom: 2px solid #b3cbd4;
+      padding-bottom: 6px;
+    }
+
+    .hero-malaysia {
+      font-size: 1.1rem;
+      margin: 32px 0 24px;
+      color: #4a6672;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 400;
+      border-left: 3px solid #608b9b;
+      padding-left: 24px;
+      background: transparent;
+    }
+
+    .hero-malaysia i {
+      color: #608b9b;
+      font-size: 1.2rem;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: #3f5863;
+      max-width: 520px;
+      margin-bottom: 40px;
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+    }
+
+    .btn-primary {
+      background: #0a3847;
+      border: none;
+      padding: 16px 42px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      color: white;
+      text-transform: uppercase;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: #1c5568;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #608b9b;
+      padding: 16px 42px;
+      font-weight: 600;
+      color: #2f5a69;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-outline:hover {
+      background: #f0f7fa;
+      border-color: #0a3847;
+      color: #0a3847;
+    }
+
+    .hero-image {
+      background: #e2ecf0;
+      height: 500px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #d0e0e5;
+      box-shadow: 0 30px 40px -25px rgba(20, 60, 70, 0.2);
+    }
+
+    .hero-image i {
+      font-size: 12rem;
+      color: #8aaebd;
+      opacity: 0.8;
+    }
+
+    /* section titles — clean, minimal */
+    .section-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin: 60px 0 30px;
+      color: #0f404f;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .section-title span {
+      background: #e2eef3;
+      padding: 4px 16px;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: #2f6475;
+      border-radius: 0;
+    }
+
+    /* category grid – soft, modern, no glow */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+    }
+
+    .category-card {
+      background: white;
+      padding: 40px 20px;
+      text-align: center;
+      border: 1px solid #e0edf2;
+      transition: all 0.2s;
+    }
+
+    .category-card:hover {
+      border-color: #608b9b;
+      box-shadow: 0 15px 30px -15px rgba(20, 90, 100, 0.15);
+    }
+
+    .category-card i {
+      font-size: 3.2rem;
+      color: #577e8d;
+      opacity: 0.9;
+    }
+
+    .category-card h3 {
+      margin: 20px 0 8px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #1a4b5a;
+    }
+
+    .category-card p {
+      color: #57737d;
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+
+    /* product grid — premium, serene */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px 30px;
+      margin: 40px 0 60px;
+    }
+
+    .product-item {
+      background: white;
+      border: 1px solid #e4edf2;
+      transition: 0.2s;
+    }
+
+    .product-item:hover {
+      border-color: #99b9c5;
+      box-shadow: 0 25px 35px -22px rgba(0,70,80,0.1);
+    }
+
+    .product-image {
+      height: 280px;
+      background: #ddecf2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4.5rem;
+      color: #698f9e;
+      border-bottom: 1px solid #d0e0e5;
+    }
+
+    .product-info {
+      padding: 24px 22px 28px;
+    }
+
+    .product-cat {
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      color: #7099a7;
+      font-weight: 500;
+    }
+
+    .product-name {
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin: 8px 0 10px;
+      color: #14323d;
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0b4555;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .product-price span {
+      font-size: 0.9rem;
+      text-decoration: line-through;
+      color: #96b1bb;
+      font-weight: 400;
+    }
+
+    .btn-add {
+      background: transparent;
+      border: 1px solid #608b9b;
+      width: 100%;
+      padding: 14px 0;
+      margin-top: 20px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #2f5a69;
+      transition: 0.2s;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-add:hover {
+      background: #0a3847;
+      color: white;
+      border-color: #0a3847;
+    }
+
+    /* TNG PAYMENT — premium, subtle, less game, but clearly modern malaysia */
+    .payment-section {
+      background: #ffffff;
+      border-top: 1px solid #cddee5;
+      border-bottom: 1px solid #cddee5;
+      margin: 80px 0;
+      padding: 70px 0;
+      box-shadow: inset 0 2px 10px rgba(0,50,60,0.02);
+    }
+
+    .payment-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .payment-info h2 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #0d4050;
+      margin-bottom: 20px;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .tng-badge {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: #f2f9fc;
+      padding: 16px 36px;
+      width: fit-content;
+      border: 1px solid #b6d2dd;
+      margin: 25px 0 20px;
+    }
+
+    .tng-badge i {
+      font-size: 3.2rem;
+      color: #2b6f85;
+    }
+
+    .tng-badge span {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #154e5e;
+      letter-spacing: 1px;
+    }
+
+    .payment-desc {
+      font-size: 1.1rem;
+      max-width: 600px;
+      color: #3b6575;
+      line-height: 1.6;
+      border-left: 3px solid #8bb7c7;
+      padding-left: 24px;
+      background: transparent;
+    }
+
+    .payment-cta {
+      background: #ffffff;
+      border: 2px solid #0d5265;
+      padding: 22px 58px;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 1.3rem;
+      color: #0d5265;
+      letter-spacing: 3px;
+      transition: 0.2s;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(10,80,90,0.05);
+    }
+
+    .payment-cta:hover {
+      background: #0d5265;
+      color: white;
+      border-color: #0d5265;
+    }
+
+    /* footer elegant */
+    footer {
+      border-top: 1px solid #d0e0e5;
+      background: #fcfefe;
+      padding: 60px 0 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 50px;
+    }
+
+    .footer-logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #104857;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .footer-small {
+      color: #66818d;
+      margin-top: 16px;
+      font-size: 0.9rem;
+    }
+
+    .footer-col h4 {
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #195060;
+      font-size: 0.9rem;
+    }
+
+    .footer-col a {
+      display: block;
+      color: #3f6775;
+      text-decoration: none;
+      margin-bottom: 12px;
+      font-weight: 300;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover {
+      color: #0a3847;
+    }
+
+    .social i {
+      font-size: 1.8rem;
+      margin-right: 18px;
+      color: #6b919f;
+      transition: color 0.2s;
+    }
+
+    .social i:hover {
+      color: #0b4f62;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 50px;
+      padding-top: 20px;
+      border-top: 1px solid #d6e4e9;
+      color: #628591;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-flex">
+      <div class="logo">LYTEZCO</div>
+      <div class="nav-links">
+        <a href="#">new</a>
+        <a href="#">kl edit</a>
+        <a href="#">batik</a>
+        <a href="#">tng</a>
+        <i class="fas fa-shopping-bag cart-icon"></i>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO — modern, malaysia, editorial, no game -->
+    <div class="hero">
+      <div>
+        <h1>MODERN <span>KUALA LUMPUR</span></h1>
+        <div class="hero-malaysia">
+          <i class="fas fa-map-pin"></i> Kuala Lumpur · Penang · Johor · TNG eWallet
+        </div>
+        <p class="hero-desc">LYTEZCO — contemporary streetwear crafted in Malaysia. Clean lines, premium fabrics, and a connection to local culture.</p>
+        <div class="cta-buttons">
+          <button class="btn-primary">EXPLORE</button>
+          <button class="btn-outline">LOOKBOOK</button>
+        </div>
+      </div>
+      <div class="hero-image">
+        <i class="fas fa-tshirt"></i>
+      </div>
+    </div>
+
+    <!-- categories with malaysia inspirations -->
+    <h2 class="section-title">EDITORIAL <span>MALAYSIA</span></h2>
+    <div class="category-grid">
+      <div class="category-card">
+        <i class="fas fa-cloud-rain"></i>
+        <h3>HIGHLAND</h3>
+        <p>cameron / genting</p>
+      </div>
+      <div class="category-card">
+        <i class="fas fa-water"></i>
+        <h3>STRAITS</h3>
+        <p>penang / melaka</p>
+      </div>
+      <div class="category-card">
+        <i class="fas fa-city"></i>
+        <h3>KUALA LUMPUR</h3>
+        <p>urban geometry</p>
+      </div>
+      <div class="category-card">
+        <i class="fas fa-palm-tree"></i>
+        <h3>BORNEO</h3>
+        <p>kuching / kota kinabalu</p>
+      </div>
+    </div>
+
+    <!-- featured products — minimalist, premium -->
+    <h2 class="section-title">CORE SERIES</h2>
+    <div class="product-grid">
+      <div class="product-item">
+        <div class="product-image"><i class="fas fa-shirt"></i></div>
+        <div class="product-info">
+          <div class="product-cat">BATIK KONTEMPORARI</div>
+          <div class="product-name">LIMESTONE SHIRT</div>
+          <div class="product-price">RM 359 <span>RM 420</span></div>
+          <button class="btn-add"><i class="fas fa-shopping-bag"></i> ADD · TNG</button>
+        </div>
+      </div>
+      <div class="product-item">
+        <div class="product-image"><i class="fas fa-vest"></i></div>
+        <div class="product-info">
+          <div class="product-cat">TECH LINEN</div>
+          <div class="product-name">IPOH JACKET</div>
+          <div class="product-price">RM 595 <span>RM 720</span></div>
+          <button class="btn-add"><i class="fas fa-shopping-bag"></i> ADD · TNG</button>
+        </div>
+      </div>
+      <div class="product-item">
+        <div class="product-image"><i class="fas fa-hat-cowboy"></i></div>
+        <div class="product-info">
+          <div class="product-cat">NEUTRAL</div>
+          <div class="product-name">GEORGETOWN BUCKET</div>
+          <div class="product-price">RM 189 <span>RM 230</span></div>
+          <button class="btn-add"><i class="fas fa-shopping-bag"></i> ADD · TNG</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- TNG PAYMENT — refined, integrated, premium, no game -->
+  <section class="payment-section">
+    <div class="container payment-flex">
+      <div class="payment-info">
+        <h2>TOUCH 'N GO eWALLET<br><span style="font-size: 1.8rem; font-weight: 400; color: #4f7e8f;">seamless payment in malaysia</span></h2>
+        <div class="tng-badge">
+          <i class="fas fa-qrcode"></i>
+          <span>TNG eWallet</span>
+        </div>
+        <p class="payment-desc">Fully integrated with LYTEZCO. Enjoy instant checkout, e-wallet points, and exclusive member rates. Trusted by thousands in Malaysia.</p>
+      </div>
+      <div>
+        <button class="payment-cta"><i class="fas fa-shield-alt" style="margin-right: 12px;"></i> PAY WITH TNG</button>
+        <p style="color: #5f8391; margin-top: 22px;"><i class="fas fa-check-circle" style="color: #1f7a8c;"></i> verified by Touch 'n Go Sdn Bhd</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER clean malaysia -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">LYTEZCO</div>
+        <div class="footer-small">© 2026 LYTEZCO (MY) Sdn Bhd<br>Kuala Lumpur · Malaysia</div>
+      </div>
+      <div class="footer-col">
+        <h4>locations</h4>
+        <a href="#">klcc</a>
+        <a href="#">the gardens</a>
+        <a href="#">gurney penang</a>
+        <a href="#">jpcc johor</a>
+      </div>
+      <div class="footer-col">
+        <h4>support</h4>
+        <a href="#">tng faq</a>
+        <a href="#">size guide</a>
+        <a href="#">shipping (my)</a>
+      </div>
+      <div class="footer-col">
+        <h4>connect</h4>
+        <a href="#">instagram</a>
+        <a href="#">tiktok</a>
+        <div class="social">
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-x-twitter"></i>
+          <i class="fab fa-tiktok"></i>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">MODERN STREETWEAR · INSPIRED BY MALAYSIA</div>
+  </footer>
+
+  <script>
+    // subtle demo interactions (no game alerts)
+    document.querySelector('.payment-cta').addEventListener('click', (e) => {
+      e.preventDefault();
+      alert('TNG eWallet: redirect to payment page (demo).');
+    });
+    document.querySelectorAll('.btn-add, .btn-primary, .btn-outline').forEach(btn => {
+      btn.addEventListener('click', () => alert('LYTEZCO · thank you for exploring.'));
+    });
+  </script>
+</body>
+</html>
